@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, MapPin, Phone, ChevronDown } from "lucide-react";
-
-const titles = [
-  "Engenheiro de Software",
-  "Engenheiro de Dados",
-  "Desenvolvedor Full Stack",
-  "Analista de BI",
-];
+import { useLanguage } from "@/lib/languagecontext";
 
 export default function HeroSection() {
+  const { t } = useLanguage();
+  const titles = t.hero.titles;
   const [titleIndex, setTitleIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -30,7 +26,7 @@ export default function HeroSection() {
     }
 
     return () => clearTimeout(timeout);
-  }, [charIndex, isDeleting, titleIndex]);
+  }, [charIndex, isDeleting, titleIndex, titles]);
 
   const displayedText = titles[titleIndex].substring(0, charIndex);
 
@@ -67,7 +63,7 @@ export default function HeroSection() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#39FF14]/20 bg-[#39FF14]/5 mb-8">
             <span className="w-2 h-2 rounded-full bg-[#39FF14] animate-pulse" />
             <span className="text-[#39FF14] text-sm font-medium tracking-wider uppercase">
-              Disponível para projetos
+              {t.hero.available}
             </span>
           </div>
         </motion.div>
@@ -105,7 +101,7 @@ export default function HeroSection() {
         >
           <span className="flex items-center gap-1.5">
             <MapPin size={14} className="text-[#39FF14]" />
-            Curitiba, PR
+            {t.hero.location}
           </span>
           <span className="hidden sm:inline text-gray-700">•</span>
           <span className="flex items-center gap-1.5">

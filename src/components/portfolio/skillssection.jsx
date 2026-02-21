@@ -1,35 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
-
-const skillGroups = [
-  {
-    title: "Linguagens",
-    skills: ["Python", "SQL", "JavaScript", "HTML5", "CSS3"],
-  },
-  {
-    title: "Bancos de Dados",
-    skills: ["MongoDB", "SQL Server", "Databricks", "Big Data"],
-  },
-  {
-    title: "Ferramentas & Tech",
-    skills: [
-      "Power BI",
-      "Power Automate",
-      "Power Apps",
-      "Git",
-      "Vercel",
-      "Render",
-      "APIs REST",
-      "Node.js",
-    ],
-  },
-  {
-    title: "Outros",
-    skills: ["Excel Avançado", "SharePoint", "Gen AI", "Microsoft Project", "Web Dev"],
-  },
-];
+import { useLanguage } from "@/lib/languagecontext";
 
 export default function SkillsSection() {
+  const { t } = useLanguage();
+  const skillGroups = t.skills.groups;
+
   return (
     <section id="skills" className="relative py-32 px-6">
       <div className="max-w-5xl mx-auto">
@@ -40,10 +16,10 @@ export default function SkillsSection() {
           transition={{ duration: 0.7 }}
         >
           <span className="text-[#39FF14] text-sm font-mono tracking-widest uppercase mb-4 block">
-            // habilidades
+            {t.skills.tag}
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-16">
-            Stack técnica<span className="text-[#39FF14]">.</span>
+            {t.skills.title}<span className="text-[#39FF14]">.</span>
           </h2>
         </motion.div>
 

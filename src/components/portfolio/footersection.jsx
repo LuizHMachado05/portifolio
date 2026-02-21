@@ -1,8 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Phone, Heart } from "lucide-react";
+import { useLanguage } from "@/lib/languagecontext";
 
 export default function FooterSection() {
+  const { t } = useLanguage();
+
   return (
     <footer id="contact" className="relative py-20 px-6 border-t border-gray-800/50">
       <div className="max-w-5xl mx-auto text-center">
@@ -13,13 +16,13 @@ export default function FooterSection() {
           transition={{ duration: 0.7 }}
         >
           <span className="text-[#39FF14] text-sm font-mono tracking-widest uppercase mb-4 block">
-            // contato
+            {t.footer.tag}
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-            Vamos conversar<span className="text-[#39FF14]">?</span>
+            {t.footer.title}<span className="text-[#39FF14]">?</span>
           </h2>
           <p className="text-gray-500 mb-10 max-w-md mx-auto">
-            Estou disponível para novos projetos e oportunidades. Entre em contato!
+            {t.footer.subtitle}
           </p>
         </motion.div>
 
@@ -58,7 +61,7 @@ export default function FooterSection() {
         </motion.div>
 
         <p className="text-gray-700 text-xs flex items-center justify-center gap-1">
-          Feito com <Heart size={12} className="text-[#39FF14]" /> por Luiz Henrique Machado — {new Date().getFullYear()}
+          {t.footer.madeBy} <Heart size={12} className="text-[#39FF14]" /> {t.footer.by} — {new Date().getFullYear()}
         </p>
       </div>
     </footer>

@@ -1,29 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Briefcase, GraduationCap, Globe } from "lucide-react";
-
-const highlights = [
-  {
-    icon: Briefcase,
-    label: "Experiência",
-    value: "CNH Industrial",
-    desc: "Analista de BI",
-  },
-  {
-    icon: GraduationCap,
-    label: "Formação",
-    value: "Eng. de Software",
-    desc: "UniSenai - 2023/2026",
-  },
-  {
-    icon: Globe,
-    label: "Idiomas",
-    value: "3 idiomas",
-    desc: "PT | EN | ES",
-  },
-];
+import { useLanguage } from "@/lib/languagecontext";
 
 export default function AboutSection() {
+  const { t } = useLanguage();
+  const highlights = [
+    { icon: Briefcase, label: t.about.highlightExp, value: t.about.highlightExpValue, desc: t.about.highlightExpDesc },
+    { icon: GraduationCap, label: t.about.highlightEdu, value: t.about.highlightEduValue, desc: t.about.highlightEduDesc },
+    { icon: Globe, label: t.about.highlightLang, value: t.about.highlightLangValue, desc: t.about.highlightLangDesc },
+  ];
+
   return (
     <section id="about" className="relative py-32 px-6">
       <div className="max-w-5xl mx-auto">
@@ -34,10 +21,10 @@ export default function AboutSection() {
           transition={{ duration: 0.7 }}
         >
           <span className="text-[#39FF14] text-sm font-mono tracking-widest uppercase mb-4 block">
-            // sobre mim
+            {t.about.tag}
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-8">
-            Quem sou eu<span className="text-[#39FF14]">.</span>
+            {t.about.title}<span className="text-[#39FF14]">.</span>
           </h2>
         </motion.div>
 
@@ -48,14 +35,15 @@ export default function AboutSection() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7, delay: 0.1 }}
         >
-          Estudante de Engenharia de Software com sólida vivência corporativa em{" "}
-          <span className="text-white font-medium">Business Intelligence</span> e{" "}
-          <span className="text-white font-medium">Análise de Dados</span> na CNH Industrial.
-          Experiência prática na construção de dashboards estratégicos (Power BI),
-          manipulação de dados (SQL/Databricks) e automação de processos que geraram{" "}
-          <span className="text-[#39FF14] font-semibold">30% de ganho em eficiência operacional</span>.
-          Atualmente, direciono meu foco para Engenharia de Dados e Software,
-          unindo minha base analítica com habilidades de desenvolvimento Full Stack.
+          {t.about.paragraph.includes("30%") ? (
+            <>
+              {t.about.paragraph.split("30%")[0]}
+              <span className="text-[#39FF14] font-semibold">30%</span>
+              {t.about.paragraph.split("30%")[1]}
+            </>
+          ) : (
+            t.about.paragraph
+          )}
         </motion.p>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">

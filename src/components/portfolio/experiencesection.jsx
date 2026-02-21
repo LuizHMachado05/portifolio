@@ -1,50 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Building2, Calendar } from "lucide-react";
-
-const experiences = [
-  {
-    company: "CNH Industrial",
-    role: "Analista de BI",
-    period: "Março 2024 — Agosto 2025",
-    location: "Curitiba, Paraná, Brasil",
-    responsibilities: [
-      "Desenvolvimento de dashboards analíticos em Power BI com KPIs estratégicos, utilizados por gerentes e 2 equipes para tomada de decisões, otimizando em 30% o tempo de análises",
-      "Manipulação e processamento de big data em Databricks com SQL e ETL usando Power BI para extração e tratamento de grandes volumes de dados operacionais",
-      "Automação de processos críticos com Power Automate e integração com Power Apps e SharePoint",
-      "Geração de insights estratégicos com Python para análise de dados operacionais e identificação de tendências",
-      "Automação de relatórios gerenciais com macros no Excel, economizando 30 minutos por dia",
-      "Desenvolvimento de soluções de BI para dashboards de Produção, Financeiro e RH",
-    ],
-  },
-  {
-    company: "FixFacil Assistência Virtual",
-    role: "Assistente de desenvolvimento de sistemas",
-    period: "Dezembro 2023 — Junho 2024",
-    location: "Curitiba, Paraná, Brasil",
-    responsibilities: [
-      "Suporte ao desenvolvimento e manutenção de sistemas em startup de tecnologia em fase inicial",
-      "Criação, alteração e manutenção de páginas de um sistema de gerenciamento de cotações de carnes, utilizando HTML, CSS e JavaScript",
-      "Manutenção de sistema de controle de estoque",
-      "Uso de ferramentas de IA (ChatGPT) para acelerar o desenvolvimento, resolver problemas e adaptar funcionalidades existentes, incluindo código em PHP",
-      "Desenvolvimento de protótipo de landing page no Wix Studio para instituição de ensino superior",
-    ],
-  },
-  {
-    company: "Prefeitura Municipal de Curitiba",
-    role: "Agente da Cidadania / Professor Assistente de Triathlon",
-    period: "Abril 2022 — Abril 2024",
-    location: "Curitiba, Paraná, Brasil",
-    responsibilities: [
-      "Atuação como agente da cidadania e professor assistente de triathlon, com suporte às atividades esportivas e educativas",
-      "Organização e preparação dos equipamentos de natação e ciclismo",
-      "Acompanhamento e cuidado das crianças durante os treinos e provas",
-      "Contribuição para a segurança, disciplina e bom andamento das atividades",
-    ],
-  },
-];
+import { useLanguage } from "@/lib/languagecontext";
 
 export default function ExperienceSection() {
+  const { t } = useLanguage();
+  const experiences = t.experience.experiences;
+
   return (
     <section id="experience" className="relative py-32 px-6">
       <div className="max-w-5xl mx-auto">
@@ -55,10 +17,10 @@ export default function ExperienceSection() {
           transition={{ duration: 0.7 }}
         >
           <span className="text-[#39FF14] text-sm font-mono tracking-widest uppercase mb-4 block">
-            // experiência
+            {t.experience.tag}
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-16">
-            Trajetória profissional<span className="text-[#39FF14]">.</span>
+            {t.experience.title}<span className="text-[#39FF14]">.</span>
           </h2>
         </motion.div>
 
@@ -74,7 +36,8 @@ export default function ExperienceSection() {
 
           <div className="relative pl-12 sm:pl-24 space-y-16">
             {experiences.map((exp, expIndex) => (
-              <div key={expIndex} className="relative">           
+              <div key={expIndex} className="relative">
+                <div className="absolute left-0 sm:left-8 top-2 w-3 h-3 -translate-x-[6px] rounded-full bg-[#39FF14] shadow-[0_0_12px_rgba(57,255,20,0.5)]" />
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-6 ml-4 sm:ml-5">
                   <div>
                     <h3 className="text-2xl font-bold text-white flex items-center gap-3">

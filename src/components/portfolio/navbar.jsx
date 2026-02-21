@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { useLanguage } from "@/lib/languagecontext";
 
-const links = [
-  { label: "Sobre", href: "#about" },
-  { label: "Experiência", href: "#experience" },
-  { label: "Projetos", href: "#projects" },
-  { label: "Skills", href: "#skills" },
-  { label: "Certificados", href: "#certificates" },
-  { label: "Contato", href: "#contact" },
+const linkKeys = [
+  { key: "about", href: "#about" },
+  { key: "experience", href: "#experience" },
+  { key: "projects", href: "#projects" },
+  { key: "skills", href: "#skills" },
+  { key: "certificates", href: "#certificates" },
+  { key: "contact", href: "#contact" },
 ];
 
 export default function Navbar() {
+  const { lang, setLang, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const links = linkKeys.map(({ key, href }) => ({ label: t.nav[key], href }));
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -42,7 +46,16 @@ export default function Navbar() {
             LH<span className="text-[#39FF14]">.</span>
           </button>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
+            <button
+              onClick={() => setLang(lang === "pt" ? "en" : "pt")}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-800 text-gray-400 text-sm hover:border-[#39FF14]/50 hover:text-[#39FF14] transition-colors"
+              title={lang === "pt" ? "Switch to English" : "Mudar para Português"}
+            >
+              <span className={lang === "pt" ? "font-semibold text-[#39FF14]" : ""}>PT</span>
+              <span className="text-gray-600">|</span>
+              <span className={lang === "en" ? "font-semibold text-[#39FF14]" : ""}>EN</span>
+            </button>
             {links.map((link) => (
               <button
                 key={link.href}
@@ -55,12 +68,20 @@ export default function Navbar() {
             ))}
           </div>
 
-          <button
-            className="md:hidden text-gray-400"
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="md:hidden flex items-center gap-3">
+            <button
+              onClick={() => setLang(lang === "pt" ? "en" : "pt")}
+              className="px-2.5 py-1 rounded-lg border border-gray-800 text-gray-400 text-xs font-medium"
+            >
+              {lang === "pt" ? "EN" : "PT"}
+            </button>
+            <button
+              className="text-gray-400"
+              onClick={() => setMobileOpen(!mobileOpen)}
+            >
+              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </motion.nav>
 

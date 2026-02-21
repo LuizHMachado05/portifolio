@@ -3,6 +3,7 @@ import { pagesConfig } from './pages.config';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/pagenotfound';
 import { AuthProvider } from '@/lib/authcontext';
+import { LanguageProvider } from '@/lib/languagecontext';
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -45,10 +46,12 @@ function AuthenticatedApp() {
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <NavigationTracker />
-        <AuthenticatedApp />
-      </Router>
+      <LanguageProvider>
+        <Router>
+          <NavigationTracker />
+          <AuthenticatedApp />
+        </Router>
+      </LanguageProvider>
     </AuthProvider>
   );
 }

@@ -1,42 +1,23 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Award, BookOpen, FileText, ExternalLink } from "lucide-react";
+import { useLanguage } from "@/lib/languagecontext";
 
-const certificates = [
-  {
-    title: "B2 First Certificate",
-    issuer: "Harvard University",
-    date: "Ago 2025",
-    description: "Qualificação internacionalmente reconhecida de proficiência em inglês.",
-    icon: Award,
-    color: "#39FF14",
-  },
-  {
-    title: "Formação Power BI: do Zero ao Pro",
-    issuer: "DataDriven",
-    date: "Abr 2025",
-    description: "Formação completa em Power BI para análise e visualização de dados.",
-    icon: BookOpen,
-    color: "#00f0ff",
-  },
+const certificateMeta = [
+  { icon: Award, color: "#39FF14" },
+  { icon: BookOpen, color: "#00f0ff" },
 ];
 
-const publications = [
-  {
-    title: "Proposta de mapeamento de aspectos e impactos ambientais em uma indústria automobilística",
-    venue: "Inova+ — Volvo",
-    image: "/projetos/Artigo.png",
-    url: "http://app.fiepr.org.br/revistacientifica/index.php/inovamais/article/view/831/735",
-  },
-  {
-    title: "Certificação de qualidade em engenharia de requisitos: estudo de caso em uma indústria de automação",
-    venue: "Inova+ — Selletra",
-    image: "/projetos/selletra.png",
-    url: "http://app.fiepr.org.br/revistacientifica/index.php/inovamais/article/view/889",
-  },
+const publicationUrls = [
+  { image: "/projetos/Artigo.png", url: "http://app.fiepr.org.br/revistacientifica/index.php/inovamais/article/view/831/735" },
+  { image: "/projetos/selletra.png", url: "http://app.fiepr.org.br/revistacientifica/index.php/inovamais/article/view/889" },
 ];
 
 export default function CertificatesSection() {
+  const { t } = useLanguage();
+  const certificates = t.certificates.certs.map((c, i) => ({ ...c, ...certificateMeta[i] }));
+  const publications = t.certificates.publications.map((p, i) => ({ ...p, ...publicationUrls[i] }));
+
   return (
     <section id="certificates" className="relative py-32 px-6">
       <div className="max-w-5xl mx-auto">
@@ -47,10 +28,10 @@ export default function CertificatesSection() {
           transition={{ duration: 0.7 }}
         >
           <span className="text-[#39FF14] text-sm font-mono tracking-widest uppercase mb-4 block">
-            // certificados & publicações
+            {t.certificates.tag}
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-16">
-            Conquistas<span className="text-[#39FF14]">.</span>
+            {t.certificates.title}<span className="text-[#39FF14]">.</span>
           </h2>
         </motion.div>
 
@@ -88,7 +69,7 @@ export default function CertificatesSection() {
         >
           <h3 className="text-white font-semibold text-xl mb-6 flex items-center gap-3">
             <FileText size={20} className="text-[#39FF14]" />
-            Artigos Científicos
+            {t.certificates.scientificArticles}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {publications.map((pub, i) => (

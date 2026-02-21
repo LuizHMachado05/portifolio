@@ -1,74 +1,21 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, ExternalLink, Calendar } from "lucide-react";
+import { ChevronLeft, ChevronRight, Calendar } from "lucide-react";
+import { useLanguage } from "@/lib/languagecontext";
 
-const projects = [
-  {
-    title: "Sistema de Gerenciamento Industrial",
-    date: "Ago 2025",
-    description:
-      "Sistema web de gerenciamento de projetos industriais do Power Mill com arquitetura full-stack: Frontend (HTML5, CSS3, JavaScript responsivo), Backend (Node.js com APIs RESTful), Banco de Dados (MongoDB), Deploy (Vercel e Render).",
-    tags: ["Node.js", "MongoDB", "JavaScript", "REST API", "Vercel", "Render", "React", "Tailwind CSS"],
-    image: "/projetos/simoldes1.png",
-    color: "#39FF14",
-  },
-  {
-    title: "Dashboards Interativos Power BI",
-    date: "Mar 2024",
-    description:
-      "Desenvolvimento de dashboards para análise de dados com filtros dinâmicos, indicadores KPI e gráficos interativos para diversos setores (Produção, Financeiro e RH).",
-    tags: ["Power BI", "SQL", "Databricks", "ETL", "KPIs"],
-    image: "/projetos/powerbi.png",
-    color: "#00f0ff",
-  },
-  {
-    title: "Dashboard de KPIs Empresarial",
-    date: "nov de 2024",
-    description:
-      "Desenvolvimento de um dashboard interativo de KPIs para apoiar a tomada de decisão gerencial, consolidando indicadores operacionais e de negócio em uma única solução analítica.",
-    tags: ["Power BI", "SQL", "Databricks", "ETL", "KPIs"],
-    image: "/projetos/empresadash.jpg",
-    color: "#00f0ff",
-  },
-  {
-    title: "Site Portfólio Pessoal",
-    date: "Abr 2024",
-    description:
-      "Criação de site responsivo com HTML, CSS e JavaScript para apresentação de projetos e contato profissional com design moderno e otimizado para SEO.",
-    tags: ["HTML5", "CSS3", "JavaScript", "SEO", "Responsivo"],
-    image: "/projetos/portfolio.jpeg",
-    color: "#39FF14",
-  },
-  {
-    title: "Jogo RPG com Python",
-    date: "Out 2025",
-    description:
-      "Jogo de perguntas e respostas com temática de batalha em turnos no estilo RPG utilizando Python e biblioteca Pygame, implementando lógica de programação avançada.",
-    tags: ["Python", "Pygame", "Game Dev", "OOP"],
-    image: "/projetos/jogo.jpg",
-    color: "#00f0ff",
-  },
-  {
-    title: "Dashboard Web de Gerencialmento de impressoras 3d",
-    date: "Dez 2025",
-    description:
-      "Desenvolvimento de um dashboard web para gerenciamento e monitoramento de impressoras 3d, contando com indicadores de distancia do eixo e status da impressora",
-    tags: ["Docker", "HTML5", "CSS3", "JavaScript", "Node-RED"],
-    image: "/projetos/metabee.png",
-    color: "#39FF14",
-  },
-  {
-    title: "Enciclopédia de Mobs – Projeto Web",
-    date: "Jul 2023",
-    description:
-      "Site educacional com interface interativa apresentando mobs inspirados no Minecraft.",
-    tags: ["HTML5", "CSS3", "JavaScript"],
-    image: "/projetos/minecraft.png",
-    color: "#39FF14",
-  },
+const projectAssets = [
+  { image: "/projetos/simoldes1.png", color: "#39FF14" },
+  { image: "/projetos/powerbi.png", color: "#00f0ff" },
+  { image: "/projetos/empresadash.jpg", color: "#00f0ff" },
+  { image: "/projetos/portfolio.jpeg", color: "#39FF14" },
+  { image: "/projetos/jogo.jpg", color: "#00f0ff" },
+  { image: "/projetos/metabee.png", color: "#39FF14" },
+  { image: "/projetos/minecraft.png", color: "#39FF14" },
 ];
 
 export default function ProjectsCarousel() {
+  const { t } = useLanguage();
+  const projects = t.projects.items.map((item, i) => ({ ...item, ...projectAssets[i] }));
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
   const containerRef = useRef(null);
@@ -107,11 +54,11 @@ export default function ProjectsCarousel() {
           transition={{ duration: 0.7 }}
         >
           <span className="text-[#39FF14] text-sm font-mono tracking-widest uppercase mb-4 block">
-            // projetos
+            {t.projects.tag}
           </span>
           <div className="flex items-end justify-between mb-16">
             <h2 className="text-4xl sm:text-5xl font-bold text-white">
-              Projetos em destaque<span className="text-[#39FF14]">.</span>
+              {t.projects.title}<span className="text-[#39FF14]">.</span>
             </h2>
             <div className="hidden sm:flex items-center gap-3">
               <button
